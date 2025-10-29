@@ -1,0 +1,64 @@
+{
+  "manifest_version": 3,
+  "name": "creampi",
+  "version": "2.0.0",
+  "description": "QBとMECの解説を注入。検索に対応",
+  "permissions": ["tabs", "storage"],
+  "host_permissions": [
+    "https://mec-itutor.jp/*"
+  ],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mec-itutor.jp/rpv/home/question/practice*"],
+      "js": ["content_ui.js", "content_main.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://mec-itutor.jp/rpv/home/history.aspx",
+        "https://mec-itutor.jp/rpv/home/arbitrary_learning_check.aspx*"
+      ],
+      "js": ["content_update.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "data/graphics/icon/icon_16.png",
+    "32": "data/graphics/icon/icon_32.png",
+    "48": "data/graphics/icon/icon_48.png",
+    "128": "data/graphics/icon/icon_128.png"
+  },
+  "action": {
+    "default_popup": "interface/popup.html",
+    "default_icon": {
+      "16": "data/graphics/icon/icon_16.png",
+      "32": "data/graphics/icon/icon_32.png",
+      "48": "data/graphics/icon/icon_48.png",
+      "128": "data/graphics/icon/icon_128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "data/mapping.json",
+        "data/qb/*",
+        "data/mec/*",
+        "data/graphics/img/*",
+        "data/graphics/styles/app.css",
+        "data/graphics/styles/module.css",
+        "data/graphics/fonts/*",
+        "data/graphics/*",
+        "interface/viewer.html",
+        "interface/viewer.js",
+        "interface/search.html",
+        "interface/search.js",
+        "interface/data/basedata.json",
+        "interface/data/history.json"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
